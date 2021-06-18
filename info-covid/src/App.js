@@ -1,17 +1,41 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import DataProvince from './pages/DataProvince'
+import LoginPage from './pages/LoginPage'
+import RouteGuard from './components/RouteGuard'
+import React, { useEffect } from 'react'
+import { authenticated } from './store/action'
+import { Provider } from 'react-redux'
+import store from './store/store'
+
 function App() {
-	// const [data, setData] = useState(null)
-	// const [loading, setLoading] = useState(false)
+	const isAuthenticated = store.getState().isAuthenticated
+
+	useEffect(() => {
+		if (localStorage.access_token) {
+			store.dispatch(authenticated())
+		}
+	}, [])
 
 	return (
-		<Router>
-			<Switch>
-				<Route exact path="/" component={HomePage} />
-				<Route path="/detail" component={DataProvince} />
-			</Switch>
-		</Router>
+		<Provider store={store}>
+			<Router>
+				<Switch>
+					<RouteGuard
+						exact
+						path="/"
+						component={HomePage}
+						auth={isAuthenticated}
+					/>
+					<RouteGuard
+						path="/detail-province"
+						component={DataProvince}
+						auth={isAuthenticated}
+					/>
+					<Route path="/login" component={LoginPage} />
+				</Switch>
+			</Router>
+		</Provider>
 	)
 }
 

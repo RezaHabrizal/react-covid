@@ -1,9 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
-import { Line, Bar } from 'react-chartjs-2'
+import { useEffect } from 'react'
+import { Bar } from 'react-chartjs-2'
 import { fetchMonthly } from '../store/action'
 import { useHistory } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Card from '../components/Card'
 
 export default function HomePage() {
 	const dispatch = useDispatch()
@@ -33,7 +35,7 @@ export default function HomePage() {
 		],
 		datasets: [
 			{
-				label: 'Cases',
+				label: 'Cases In Indonesia 2020',
 				data: monthlyValue,
 				fill: false,
 				backgroundColor: [
@@ -58,14 +60,15 @@ export default function HomePage() {
 		],
 	}
 
-	const goDetail = () => {
-		history.push('/detail')
-	}
-
 	return (
 		<>
-			<Bar height={75} data={dataGraph} />
-			<button onClick={() => goDetail()}>DATA BY POVINSI</button>
+			<Navbar />
+			<Card />
+			<div className="mt-50 flex justify-center">
+				<div className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/2 dark:text-white dark:bg-gray-800">
+					<Bar data={dataGraph} />
+				</div>
+			</div>
 		</>
 	)
 }

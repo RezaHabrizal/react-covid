@@ -6,6 +6,7 @@ let initalState = {
 	loading: false,
 	monthlyData: [],
 	monthlyValue: [],
+	isAuthenticated: false,
 }
 
 function reducer(state = initalState, action) {
@@ -19,6 +20,12 @@ function reducer(state = initalState, action) {
 			return { ...state, monthlyData: payload }
 		case 'MONTHLY_VALUE':
 			return { ...state, monthlyValue: payload }
+		case 'LOGIN':
+			return { ...state, isAuthenticated: true }
+		case 'AUTHENTICATED':
+			return { ...state, isAuthenticated: true }
+		case 'LOGOUT':
+			return { ...state, isAuthenticated: false }
 		default:
 			return state
 	}

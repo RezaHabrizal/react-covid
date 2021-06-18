@@ -95,3 +95,34 @@ export function fetchByProvince() {
 			})
 	}
 }
+
+export function login(email, password, token) {
+	return function (dispatch) {
+		axios({
+			url: 'https://ayodhya-dev.qlue.id/api/auths/login',
+			method: 'POST',
+			data: {
+				email,
+				password,
+				fcm_token: token,
+			},
+		})
+			.then(({ data }) => {
+				localStorage.setItem('access_token', data.token.access_token)
+				dispatch({ type: 'LOGIN' })
+			})
+			.catch(console.log)
+	}
+}
+
+export function authenticated() {
+	return function (dispatch) {
+		dispatch({ type: 'AUTHENTICATED' })
+	}
+}
+
+export function logout() {
+	return function (dispatch) {
+		dispatch({ type: 'LOGOUT' })
+	}
+}
