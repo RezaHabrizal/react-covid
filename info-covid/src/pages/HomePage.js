@@ -3,21 +3,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { fetchMonthly } from '../store/action'
-import { useHistory } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Card from '../components/Card'
+import Loading from '../components/Loading'
 
 export default function HomePage() {
 	const dispatch = useDispatch()
 	const loading = useSelector((state) => state.loading)
 	const monthlyValue = useSelector((state) => state.monthlyValue)
-	const history = useHistory()
+
 	useEffect(() => {
 		dispatch(fetchMonthly())
 	}, [])
 
 	if (loading) {
-		return <h1>Loading......</h1>
+		return <Loading />
 	}
 
 	const dataGraph = {

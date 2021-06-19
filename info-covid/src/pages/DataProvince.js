@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchByProvince } from '../store/action'
 import PaginationTable from '../components/PaginationTable'
 import Navbar from '../components/Navbar'
+import Loading from '../components/Loading'
 
 export default function DetailPage() {
 	const dispatch = useDispatch()
@@ -12,7 +13,7 @@ export default function DetailPage() {
 	}, [])
 
 	if (loading) {
-		return <h1>Loading......</h1>
+		return <Loading />
 	}
 
 	return (

@@ -3,9 +3,11 @@ import ReactMapGL, { Marker } from 'react-map-gl'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchByProvince } from '../store/action'
 import Navbar from '../components/Navbar'
+import Loading from '../components/Loading'
 
 export default function Map() {
 	const geometry = useSelector((state) => state.provinceGeo)
+	const loading = useSelector((state) => state.loading)
 
 	const [viewport, setViewport] = useState({
 		latitude: -0.789275,
@@ -21,6 +23,10 @@ export default function Map() {
 		dispatch(fetchByProvince())
 	}, [])
 
+	if (loading) {
+		return <Loading />
+	}
+
 	return (
 		<>
 			<Navbar />
@@ -34,7 +40,7 @@ export default function Map() {
 					{geometry.map((el, i) => (
 						<Marker key={i} longitude={el.x} latitude={el.y}>
 							<div>
-								<h6 className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-r">
+								<h6 className="text-sm bg-blue-300 hover:bg-gray-400 text-gray-800 font-semibold rounded-r">
 									pin
 								</h6>
 							</div>
