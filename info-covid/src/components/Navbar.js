@@ -69,6 +69,13 @@ const Navbar = () => {
 						</Link>
 					</li>
 					<li className="md:ml-4">
+						<Link to={'/maps'}>
+							<div className="border-t block no-underline hover:underline py-2 text-grey-darkest md:border-none md:p-0">
+								Peta Peneyebaran
+							</div>
+						</Link>
+					</li>
+					<li className="md:ml-4">
 						<button
 							onClick={() => handleLogout()}
 							className="border-t block no-underline hover:underline py-2 text-grey-darkest md:border-none md:p-0"

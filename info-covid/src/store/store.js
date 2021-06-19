@@ -7,6 +7,7 @@ let initalState = {
 	monthlyData: [],
 	monthlyValue: [],
 	isAuthenticated: false,
+	provinceGeo: [],
 }
 
 function reducer(state = initalState, action) {
@@ -26,6 +27,8 @@ function reducer(state = initalState, action) {
 			return { ...state, isAuthenticated: true }
 		case 'LOGOUT':
 			return { ...state, isAuthenticated: false }
+		case 'PROVINCE_GEOMETRY':
+			return { ...state, provinceGeo: payload }
 		default:
 			return state
 	}

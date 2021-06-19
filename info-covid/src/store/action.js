@@ -78,13 +78,16 @@ export function fetchByProvince() {
 	return function (dispatch) {
 		dispatch({ type: 'LOAD_DATA', payload: true })
 		let result = []
+		let geometry = []
 		axios({
 			url: 'https://services5.arcgis.com/VS6HdKS0VfIhv8Ct/arcgis/rest/services/COVID19_Indonesia_per_Provinsi/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
 		})
 			.then(({ data }) => {
 				data.features.forEach((el) => {
 					result.push(el.attributes)
+					geometry.push(el.geometry)
 				})
+				dispatch({ type: 'PROVINCE_GEOMETRY', payload: geometry })
 				dispatch({ type: 'PROVINCE_DATA', payload: result })
 			})
 			.catch((err) => {

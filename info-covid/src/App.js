@@ -7,6 +7,7 @@ import React, { useEffect } from 'react'
 import { authenticated } from './store/action'
 import { Provider } from 'react-redux'
 import store from './store/store'
+import Map from './pages/MapBox'
 
 function App() {
 	const isAuthenticated = store.getState().isAuthenticated
@@ -32,6 +33,7 @@ function App() {
 						component={DataProvince}
 						auth={isAuthenticated}
 					/>
+					<RouteGuard path="/maps" component={Map} auth={isAuthenticated} />
 					<Route path="/login" component={LoginPage} />
 				</Switch>
 			</Router>
